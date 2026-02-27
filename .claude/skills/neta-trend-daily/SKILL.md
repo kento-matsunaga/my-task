@@ -1,6 +1,6 @@
 ---
 name: neta-trend-daily
-description: Daily tech/AI trend digest. Fetches trending articles from Hatena Bookmark (AI + Technology) and Hacker News, rates them by interest level, and outputs a markdown report to ~/.claude/.daily/
+description: Daily tech/AI trend digest. Fetches trending articles from Hatena Bookmark (AI + Technology) and Hacker News, rates them by interest level, and outputs a markdown report to the repo's daily/ directory
 user-invocable: true
 disable-model-invocation: true
 allowed-tools: WebFetch, Bash(*), Write, Read, Glob
@@ -81,9 +81,16 @@ Points の降順でソートし、上位10件を選定してください。
 
 ## Step 4: Markdown ファイルの出力
 
-以下のフォーマットで `~/.claude/.daily/YYYY-MM-DD.md` に出力してください。
+まず、Bash で出力先のリポジトリルートを特定してください:
+
+```bash
+REPO_ROOT="$(cd "$(readlink ~/.claude/skills/neta-trend-daily)/../../.." && pwd)"
+echo "$REPO_ROOT"
+```
+
+以下のフォーマットで `${REPO_ROOT}/daily/YYYY-MM-DD.md` に出力してください。
 日付は今日の日付を使用。ファイルが既に存在する場合は上書きしてください。
-`~/.claude/.daily/` ディレクトリが存在しない場合は作成してください。
+`daily/` ディレクトリが存在しない場合は作成してください。
 
 ```markdown
 # Neta Trend Daily - YYYY-MM-DD
@@ -129,7 +136,7 @@ Sources: Hatena Bookmark Hot Entry (Technology), Hacker News Top Stories
 
 ```
 Neta Trend Daily (YYYY-MM-DD) を作成しました。
-  -> ~/.claude/.daily/YYYY-MM-DD.md
+  -> ${REPO_ROOT}/daily/YYYY-MM-DD.md
 
 ハイライト:
 - [AI特化で最も興味度が高い記事のタイトル] ★★★★★

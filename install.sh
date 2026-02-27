@@ -33,9 +33,9 @@ ln -s "${SKILL_SRC}" "${SKILL_DST}"
 echo "Symlink created:"
 echo "  ${SKILL_DST} -> ${SKILL_SRC}"
 
-# Create .daily output directory
-mkdir -p "${HOME}/.claude/.daily"
-echo "Output directory ready: ~/.claude/.daily/"
+# Create daily output directory in the repo
+mkdir -p "${SCRIPT_DIR}/daily"
+echo "Output directory ready: ${SCRIPT_DIR}/daily/"
 
 echo ""
 echo "Done! You can now use /neta-trend-daily from any project."
